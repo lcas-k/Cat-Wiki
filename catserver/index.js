@@ -3,7 +3,7 @@ const app = express()
 const api_helper = require('./API_Helper')
 require('dotenv').config()
 var cors = require('cors')
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 var fs = require('fs');
 var fileName = './catpop.json';
 var file = require(fileName);
@@ -73,4 +73,4 @@ app.post('/cat-pop-add/:breed', (req, res) => {
 */
 
 
-app.listen(PORT, () => console.log('Server Running'))
+app.listen(PORT, () => console.log('Server Running at Port' + PORT))
