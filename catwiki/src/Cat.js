@@ -8,7 +8,8 @@ function Cat(catData) {
 
   let { breed } = useParams();
   let breedData = catData.catData.filter(
-    (cat) => cat.name.toLowerCase() === breed.replace(/-/g, " ").replace(/_/g, '-')
+    (cat) =>
+      cat.name.toLowerCase() === breed.replace(/-/g, " ").replace(/_/g, "-")
   )[0];
 
   if (
@@ -17,7 +18,7 @@ function Cat(catData) {
     breedPictures[0] !== "loading"
   ) {
     setPictures(["loading"]);
-    fetch(config.SERVER_URL+"/cat-photos/" + breedData.id, {
+    fetch(config.SERVER_URL + "/cat-photos/" + breedData.id, {
       method: "POST",
     })
       .then((res) => res.json())
@@ -38,14 +39,15 @@ function Cat(catData) {
       );
     });
   let catPhoto;
-if(breedData.image) {
-  catPhoto = breedData.image.url
-} else if (breedPictures[0]) {
-  catPhoto = breedPictures[0].url
-} else {
-  catPhoto = PlaceholderCat;
-}
-
+  if (breedData && breedPictures) {
+    if (breedData.image) {
+      catPhoto = breedData.image.url;
+    } else if (breedPictures[0]) {
+      catPhoto = breedPictures[0].url;
+    } else {
+      catPhoto = PlaceholderCat;
+    }
+  }
 
   return (
     <div>
@@ -58,7 +60,7 @@ if(breedData.image) {
                   src={catPhoto}
                   alt={breedData.alt_names}
                   width="90%"
-                  style={{ "aspect-ratio": "1/1", "object-fit": "cover" }}
+                  style={{ "aspectRatio": "1/1", "objectFit": "cover" }}
                 />
               </div>
             </div>
