@@ -38,7 +38,7 @@ header img {
 
 #banner-inner {
   padding: 100px 70px;
-  width: clamp(0px, 50%, 300px);
+  width: clamp(1px, 50%, 300px);
   font-weight: 200;
 }
 
@@ -355,7 +355,7 @@ h4 {
 }
 
 .stats-bars div {
-  width: clamp(0px, 20% - 8px, 50px);
+  width: clamp(1px, 20% - 8px, 50px);
   height: 10px;
   background: #E0E0E0;
   display: inline-block;
