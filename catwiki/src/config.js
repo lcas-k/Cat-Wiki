@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 var config = {
-    SERVER_URL: "http://localhost:9000/.netlify/functions/api"
+    SERVER_URL: "https://cat-wiki-lucas.herokuapp.com"
 }
 
 export default config;
