@@ -1,6 +1,7 @@
 import CatCuddle from "./images/image 2.png";
 import CatCar from "./images/image 3.png";
 import CatShoulder from "./images/image 1.png";
+import PlaceholderCat from "./images/placeholder.png";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import LogoWhite from "./images/CatwikiLogo_white.svg";
@@ -155,14 +156,14 @@ class Home extends React.Component {
         );
       });
     let popularityList = [];
-    if (
-      this.state.popularity.length !== 0 &&
-      this.state.searchInput.searchBreeds.length !== 0
-    )
+    console.log(this.state.popularity)
+    console.log(this.state.searchInput.searchBreeds)
+    if ( this.state.popularity.length !== 0 && this.state.searchInput.searchBreeds.length !== 0 )
       popularityList = this.state.popularity.slice(0, 4).map((catData) => {
         let cat = this.state.searchInput.searchBreeds.filter(
           (catList) => catList.id === catData[0]
         )[0];
+        console.log(cat)
         let index = this.state.popularity.indexOf(catData);
         return (
           <Link
@@ -175,7 +176,11 @@ class Home extends React.Component {
             className="highlight-cat"
           >
             <div className={index === 0 && "highlight-active"}>
+              {cat.image ? (
               <img src={cat.image.url} alt={cat.name} />
+              ) : (
+                <img src={PlaceholderCat} alt={cat.name} />
+              )}
             </div>
             <p>{cat.name}</p>
           </Link>

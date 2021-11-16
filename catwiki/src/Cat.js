@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
 import config from "./config.js";
+import PlaceholderCat from "./images/placeholder.png";
 
 function Cat(catData) {
   const [breedPictures, setPictures] = useState([]);
@@ -36,7 +37,15 @@ function Cat(catData) {
         />
       );
     });
-  console.log(catPictures);
+  let catPhoto;
+if(breedData.image) {
+  catPhoto = breedData.image.url
+} else if (breedPictures[0]) {
+  catPhoto = breedPictures[0].url
+} else {
+  catPhoto = PlaceholderCat;
+}
+
 
   return (
     <div>
@@ -46,7 +55,7 @@ function Cat(catData) {
             <div id="cat-thumbnail">
               <div className="highlight-active">
                 <img
-                  src={breedData.image.url}
+                  src={catPhoto}
                   alt={breedData.alt_names}
                   width="90%"
                   style={{ "aspect-ratio": "1/1", "object-fit": "cover" }}

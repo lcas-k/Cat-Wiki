@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import config from "./config.js";
+import PlaceholderCat from "./images/placeholder.png";
 
 function Top10({ breeds }) {
   const [popList, setPopList] = useState([]);
@@ -28,12 +29,21 @@ function Top10({ breeds }) {
               breed={cat.id}
             >
               <div className="top-image">
+              {cat.image ? (
                 <img
                   src={cat.image.url}
                   alt={cat.name}
                   width="100%"
                   style={{ aspectRatio: "1/1", objectFit: "cover" }}
                 />
+                ) : (
+                  <img
+                  src={PlaceholderCat}
+                  alt={cat.name}
+                  width="100%"
+                  style={{ aspectRatio: "1/1", objectFit: "cover" }}
+                />
+                )}
               </div>
               <div className="top-description">
                 <h4>
