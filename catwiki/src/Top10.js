@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import config from "./config.js";
 
 function Top10({ breeds }) {
   const [popList, setPopList] = useState([]);
 
   if (breeds.length !== 0 && popList.length === 0 && popList[0] !== 'loading') {
-    fetch(
-      window.location.protocol +
-        "//" +
-        window.location.hostname +
-        ":8080/cat-popularity",
+    fetch(config.SERVER_URL+"/cat-popularity",
       {
         method: "GET",
       }

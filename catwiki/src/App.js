@@ -16,6 +16,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+import config from "./config.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch(window.location.protocol+'//'+window.location.hostname+":8080/cat-breeds")
+    fetch(config.SERVER_URL+"/cat-breeds")
     .then(res => res.json())
     .then(data => {
       this.setState(() => ({

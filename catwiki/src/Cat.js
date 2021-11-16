@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
+import config from "./config.js";
 
 function Cat(catData) {
   const [breedPictures, setPictures] = useState([]);
@@ -15,7 +16,7 @@ function Cat(catData) {
     breedPictures[0] !== "loading"
   ) {
     setPictures(["loading"]);
-    fetch(window.location.protocol+'//'+window.location.hostname+":8080/cat-photos/" + breedData.id, {
+    fetch(config.SERVER_URL+"/cat-photos/" + breedData.id, {
       method: "POST",
     })
       .then((res) => res.json())

@@ -6,6 +6,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import LogoWhite from "./images/CatwikiLogo_white.svg";
 import React from "react";
 import { Link } from "react-router-dom";
+import config from "./config.js";
 
 class Home extends React.Component {
   constructor(props) {
@@ -39,11 +40,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.scrollBar();
-    fetch(
-      window.location.protocol +
-        "//" +
-        window.location.hostname +
-        ":8080/cat-popularity",
+    fetch(config.SERVER_URL+"/cat-popularity",
       {
         method: "GET",
       }
@@ -102,11 +99,7 @@ class Home extends React.Component {
   setPopularity(e) {
     console.log(e);
     let breed = e.currentTarget.attributes.breed.value;
-    fetch(
-      window.location.protocol +
-        "//" +
-        window.location.hostname +
-        ":8080/cat-pop-add/" +
+    fetch(config.SERVER_URL+"/cat-pop-add/" +
         breed,
       {
         method: "POST",
