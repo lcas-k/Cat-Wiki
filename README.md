@@ -56,7 +56,7 @@ You can see my finished Project here: [Cat Wiki](https://cat-wiki-lucas.netlify.
 
 <!-- List the features of your application or follow the template. Don't share the figma file here :) -->
 
-This Webapplication is a online Infomrational Website about CatBreeds. You can lookup Cats, search specific breeds and see the most searched Breeds.
+This Webapplication is a online informational Website about Cat-Breeds. You can lookup Cats, search specific Breeds and see the most searched Breeds.
 If you select a Cat you can see more Information about that breed and additional Photos.
 
 This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/f4NJ53rcfgrP6sBMD2jt) was to build an application to complete the given user stories.
@@ -87,4 +87,4 @@ $ npm start
 
 ## Contact
 
-- GitHub [@LucaswithC](https://{github.com/LucaswithC})
+- GitHub [@LucaswithC](https://github.com/LucaswithC)
