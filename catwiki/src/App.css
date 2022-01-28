@@ -5,6 +5,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  background: #ffffff;
+}
+
 a {
   text-decoration: none;
   color: #291507;
