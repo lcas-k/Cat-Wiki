@@ -72,7 +72,7 @@ function Top10({ breeds }) {
   return (
     <div>
       <h4 style={{ fontWeight: "700" }}>Top 10 most searched breeds</h4>
-      <div id="top-list">{popList}</div>
+      <div id="top-list">{popList.length > 0 ? popList : <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}</div>
     </div>
   );
 }

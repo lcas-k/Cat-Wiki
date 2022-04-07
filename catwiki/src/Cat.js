@@ -51,7 +51,7 @@ function Cat(catData) {
 
   return (
     <div>
-      {breedData && (
+      {breedData ? (
         <div>
           <div id="cat-info">
             <div id="cat-thumbnail">
@@ -169,7 +169,7 @@ function Cat(catData) {
             </div>
           )}
         </div>
-      )}
+      ) : <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}
     </div>
   );
 }

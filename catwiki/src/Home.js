@@ -206,12 +206,12 @@ class Home extends React.Component {
                 <div
                   id="result-container"
                   className={
-                    searchSuggestions.length > 0 &&
+                    
                     this.state.searchInput.state &&
                     "search-active"
                   }
                 >
-                  <div id="results-list">{searchSuggestions}</div>
+                  <div id="results-list">{searchSuggestions.length > 0 ? searchSuggestions : <div class="lds-ring small"><div></div><div></div><div></div><div></div></div>}</div>
                 </div>
               </div>
             )}
@@ -244,7 +244,7 @@ class Home extends React.Component {
                     />
                     <i className="fas fa-search"></i>
                   </div>
-                  <div id="results-list-mobile">{searchSuggestions}</div>
+                  <div id="results-list-mobile">{searchSuggestions.length > 0 ? searchSuggestions : <div class="lds-ring small"><div></div><div></div><div></div><div></div></div>}</div>
                 </div>
                 </div>
               </div>
@@ -262,9 +262,9 @@ class Home extends React.Component {
               Top 10 Cats ⟶
             </Link>
           </div>
-          <div id="highlight-cats">
-            {popularityList.length >= 0 && popularityList}
-          </div>
+          
+            {popularityList.length > 0 ? <div id="highlight-cats"> {popularityList} </div> : <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}
+          
         </div>
         <div id="why-cat">
           <div id="why-left">
