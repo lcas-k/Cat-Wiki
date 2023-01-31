@@ -172,8 +172,8 @@ class Home extends React.Component {
             className="highlight-cat"
           >
             <div className={index === 0 && "highlight-active"}>
-              {cat.image ? (
-              <img src={cat.image.url} alt={cat.name} />
+              {cat.reference_image_id ? (
+              <img src={`https://cdn2.thecatapi.com/images/${cat.reference_image_id}.jpg`} alt={cat.name} />
               ) : (
                 <img src={PlaceholderCat} alt={cat.name} />
               )}
@@ -211,7 +211,7 @@ class Home extends React.Component {
                     "search-active"
                   }
                 >
-                  <div id="results-list">{searchSuggestions.length > 0 ? searchSuggestions : <div class="lds-ring small"><div></div><div></div><div></div><div></div></div>}</div>
+                  <div id="results-list">{searchSuggestions.length > 0 ? searchSuggestions : <div className="search-result">No breed found</div>}</div>
                 </div>
               </div>
             )}
@@ -230,7 +230,7 @@ class Home extends React.Component {
                 <div className={this.state.searchInput.modalActive ? 'mobile-search-modal modal-active' : 'mobile-search-modal'}>
                   <div className="modal-inner">
                   <div className="modal-header">
-                  <i class="fas fa-times" onClick={this.toggleSearchModal}></i>
+                  <i className="fas fa-times" onClick={this.toggleSearchModal}></i>
                   </div>  
                   <div className="input-icon">
                     <input
@@ -244,7 +244,7 @@ class Home extends React.Component {
                     />
                     <i className="fas fa-search"></i>
                   </div>
-                  <div id="results-list-mobile">{searchSuggestions.length > 0 ? searchSuggestions : <div class="lds-ring small"><div></div><div></div><div></div><div></div></div>}</div>
+                  <div id="results-list-mobile">{searchSuggestions.length > 0 ? searchSuggestions : <div className="lds-ring small"><div></div><div></div><div></div><div></div></div>}</div>
                 </div>
                 </div>
               </div>
@@ -263,7 +263,7 @@ class Home extends React.Component {
             </Link>
           </div>
           
-            {popularityList.length > 0 ? <div id="highlight-cats"> {popularityList} </div> : <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}
+            {popularityList.length > 0 ? <div id="highlight-cats"> {popularityList} </div> : <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
           
         </div>
         <div id="why-cat">

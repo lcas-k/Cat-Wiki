@@ -29,9 +29,9 @@ function Top10({ breeds }) {
               breed={cat.id}
             >
               <div className="top-image">
-              {cat.image ? (
+              {cat.reference_image_id ? (
                 <img
-                  src={cat.image.url}
+                  src={`https://cdn2.thecatapi.com/images/${cat.reference_image_id}.jpg`}
                   alt={cat.name}
                   width="100%"
                   style={{ aspectRatio: "1/1", objectFit: "cover" }}
@@ -63,16 +63,12 @@ function Top10({ breeds }) {
     fetch(window.location.protocol+'//'+window.location.hostname+':8080/cat-pop-add/' + breed, {
         method: 'POST'
       })
-      .then(res => res.json())
-      .then(data => {
-        
-      })
   }
 
   return (
     <div>
       <h4 style={{ fontWeight: "700" }}>Top 10 most searched breeds</h4>
-      <div id="top-list">{popList.length > 0 ? popList : <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}</div>
+      <div id="top-list">{popList.length > 0 ? popList : <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}</div>
     </div>
   );
 }

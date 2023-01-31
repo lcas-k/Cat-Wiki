@@ -1,53 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useHistory  } from "react-router-dom";
 import config from "./config.js";
 import PlaceholderCat from "./images/placeholder.png";
 
 function Cat(catData) {
-  const [breedPictures, setPictures] = useState([]);
+  const [breedData, setBreedData] = useState([]);
+  const [catPictures, setCatPictures] = useState([]);
+  const [catPhoto, setCatPhoto] = useState([]);
+  
+  let history = useHistory()
+  let params = useParams();
 
-  let { breed } = useParams();
-  let breedData = catData.catData.filter(
-    (cat) =>
-      cat.name.toLowerCase() === breed.replace(/-/g, " ").replace(/_/g, "-")
-  )[0];
+  useEffect(() => {
+    async function loadData() {
+      let { breed } = params;
+      if (!params.breed) {
+        history.push("/");
+        return
+      }
+      let paramBreed = catData.catData.filter((cat) => cat.name.toLowerCase() === breed.replace(/-/g, " ").replace(/_/g, "-"))[0];
+      if(!paramBreed) {
+        history.push("/")
+        return
+      }
+      setBreedData(paramBreed);
 
-  if (
-    breedData &&
-    breedPictures.length === 0 &&
-    breedPictures[0] !== "loading"
-  ) {
-    setPictures(["loading"]);
-    fetch(config.SERVER_URL + "/cat-photos/" + breedData.id, {
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setPictures(data);
-      });
-  }
+      let pics = [];
+      await fetch(config.SERVER_URL + "/cat-photos/" + paramBreed.id, {
+        method: "POST",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          pics = data;
+        });
 
-  let catPictures =
-    breedPictures[0] !== "loading" &&
-    breedPictures.map((picture) => {
-      return (
-        <img
-          src={picture.url}
-          alt={picture.breeds[0].alt_names}
-          loading="lazy"
-        />
+      setCatPictures(
+        pics.map((picture) => {
+          return <img src={picture.url} alt={paramBreed.name} loading="lazy" />;
+        })
       );
-    });
-  let catPhoto;
-  if (breedData && breedPictures) {
-    if (breedData.image) {
-      catPhoto = breedData.image.url;
-    } else if (breedPictures[0]) {
-      catPhoto = breedPictures[0].url;
-    } else {
-      catPhoto = PlaceholderCat;
+
+      let catPhoto;
+      if (paramBreed && pics) {
+        if (paramBreed.reference_image_id) {
+          catPhoto = `https://cdn2.thecatapi.com/images/${paramBreed.reference_image_id}.jpg`
+        } else if (pics[0]) {
+          catPhoto = pics[0].url;
+        } else {
+          catPhoto = PlaceholderCat;
+        }
+      }
+      setCatPhoto(catPhoto);
     }
-  }
+    loadData();
+  }, [catData, history, params]);
 
   return (
     <div>
@@ -56,12 +63,7 @@ function Cat(catData) {
           <div id="cat-info">
             <div id="cat-thumbnail">
               <div className="highlight-active">
-                <img
-                  src={catPhoto}
-                  alt={breedData.alt_names}
-                  width="90%"
-                  style={{ "aspectRatio": "1/1", "objectFit": "cover" }}
-                />
+                <img src={catPhoto} alt={breedData.alt_names} width="90%" style={{ aspectRatio: "1/1", objectFit: "cover" }} />
               </div>
             </div>
             <div id="cat-description">
@@ -150,9 +152,7 @@ function Cat(catData) {
                 <div className="stats-title">
                   <strong>Stranger friendly:</strong>
                 </div>
-                <div
-                  className={`stats-bars bars-${breedData.stranger_friendly}`}
-                >
+                <div className={`stats-bars bars-${breedData.stranger_friendly}`}>
                   <div></div>
                   <div></div>
                   <div></div>
@@ -169,7 +169,14 @@ function Cat(catData) {
             </div>
           )}
         </div>
-      ) : <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}
+      ) : (
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
     </div>
   );
 }
